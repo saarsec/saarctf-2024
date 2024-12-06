@@ -1,0 +1,14 @@
+requests
+redis
+pwntools
+jwcrypto
+websocket-client
+
+# rent-a-printer
+fpdf
+pyipp
+opencv-python-headless
+pypdf[image]
+pyzbar
+flask
+flask-login

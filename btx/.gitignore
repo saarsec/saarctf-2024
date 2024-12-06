@@ -1,0 +1,6 @@
+/.idea
+/.nobadge
+/public/
+/build_output/
+/docker-container-infos.txt
+/venv

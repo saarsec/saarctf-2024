@@ -1,0 +1,11 @@
+---
+
+services:
+  service:
+    image: "saarsec/rent-a-printer"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6310:6310"
+      - "631:631"

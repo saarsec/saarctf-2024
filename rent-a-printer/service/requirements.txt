@@ -1,0 +1,8 @@
+pycups
+pypdf[image]
+qrcode[pil]
+requests
+flask
+flask-login
+pyipp
+gunicorn

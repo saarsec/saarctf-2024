@@ -1,0 +1,10 @@
+---
+
+services:
+  service:
+    image: "saarsec/reversaar"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7331:7331"

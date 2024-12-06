@@ -1,0 +1,10 @@
+---
+
+services:
+  service:
+    image: "saarsec/deutsches-flugzeug"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"

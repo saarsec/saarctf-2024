@@ -1,0 +1,9 @@
+/.idea
+/.nobadge
+/public/
+/build_output/
+/docker-container-infos.txt
+/service/data
+/service/data-client
+/service/bin
+__pycache__

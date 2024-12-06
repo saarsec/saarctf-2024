@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+    <div class="text-center px-4 py-5 my-5">
+        <span class="fs-1">&#x1F5B6;</span>
+        <h1 class="display-5 fw-bold">Rent-a-Printer</h1>
+
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-2">
+                Want to print something, but don't have the necessary hardware?
+            </p>
+            <p class="lead mb-2">
+                Rent-a-printer is here to solve your issues!
+                Just grab one of our highly customizable printers and start printing!
+                We offer quick setup times, powerful configuration (including watermarks and cutting-edge digitalized
+                prints), fast delivery times, and great compatibility with the leading industry standard IPP.
+            </p>
+            <p class="lead mb-4">
+                Free trials are available.
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a href="{{ url_for('auth.signup') }}" class="btn btn-lg btn-primary">Signup today!</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

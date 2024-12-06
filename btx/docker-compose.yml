@@ -1,0 +1,10 @@
+---
+
+services:
+  service:
+    image: "saarsec/btx"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "1983:1983"

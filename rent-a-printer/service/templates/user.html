@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.name }}{% endblock %}
+
+{% block content %}
+    <h1 class="mb-3">Welcome, {{ user.name }}!</h1>
+
+    <div class="section mb-5">
+        <div class="list-group mb-3">
+            {% for printer in printers %}
+                <div class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <h5>&#x1F5B6; {{ printer.name }}</h5>
+                        <div>Address: <code>{{ printer|cups_url }}</code></div>
+                        <div>
+                            {{ printer.templates|length }} templates
+                            {% for upgrade in printer.upgrades %}
+                                , + {{ upgrade }} upgrade
+                            {% else %}
+                                , no upgrades
+                            {% endfor %}
+                        </div>
+                        {% if printer.active and printer.trial_expires_at %}
+                            <div class="text-warning-emphasis">
+                                Trial expires at {{ printer.trial_expires_at | unix_timestamp }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="text-end">
+                        {% if printer.active %}
+                            <span class="badge text-bg-success rounded-pill">online</span>
+                        {% else %}
+                            <span class="badge text-bg-warning rounded-pill">trial expired</span>
+                        {% endif %}
+                        <br/>
+                        <small class="text-muted mx-2">created: {{ printer.created_at | unix_timestamp_short }}</small>
+                    </div>
+                </div>
+            {% else %}
+                <span class="list-group-item disabled">you have no printers</span>
+            {% endfor %}
+        </div>
+
+        <div class="text-center">
+            <a href="{{ url_for('web.printer_add') }}" class="btn btn-outline-primary btn-lg">Rent a Printer</a>
+        </div>
+    </div>
+
+    <div class="section mb-5">
+        <h2>Your documents</h2>
+        <div class="list-group mb-3">
+            {% for doc in docs %}
+                <a class="list-group-item list-group-item-action"
+                   href="{{ url_for('web.doc_download', doc=doc.name) }}" target="_blank">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5>&#x1F5D0; {{ doc.name }}</h5>
+                        <small>{{ doc.ts | unix_timestamp_short }}</small>
+                    </div>
+                    <div>size: {{ doc.size | filesizeformat }}, printed {{ doc.ts | unix_timestamp }}</div>
+                </a>
+            {% else %}
+                <span class="list-group-item disabled">you have no documents. rent a printer and start printing!</span>
+            {% endfor %}
+        </div>
+
+        <form method="POST" action="{{ url_for('web.template_add') }}" enctype="multipart/form-data" class="mt-5">
+            <div class="mb-2">
+                <label for="tmpluplead" class="mb-1">Upload a custom template (+7.99$)</label>
+                <input type="file" name="template" class="form-control" id="tmpluplead">
+            </div>
+            <div>
+                <button type="submit" class="btn btn-outline-primary">Upload Template</button>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}

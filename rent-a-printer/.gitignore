@@ -1,0 +1,11 @@
+/.idea
+/.nobadge
+/public/
+/build_output/
+/docker-container-infos.txt
+
+/service/data
+/service/demo
+
+/playground/data
+/checkers/example-*.pdf

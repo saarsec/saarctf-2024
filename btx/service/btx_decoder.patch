@@ -1,0 +1,54 @@
+diff --git a/layer2.c b/layer2.c
+index ef083da..6f3f775 100644
+--- a/layer2.c
++++ b/layer2.c
+@@ -30,7 +30,7 @@ int wpointer=0;
+ //#define HOST "belgradstr.dyndns.org"
+ #define PORT 20000 /* XXX the original port for CEPT is 20005 */
+ 
+-static void layer2_connect2(const char *host, const int port);
++void layer2_connect2(const char *host, const int port);
+ 
+ void layer2_connect() 
+ {
+diff --git a/layer2.h b/layer2.h
+index 6fcb24f..b39df44 100644
+--- a/layer2.h
++++ b/layer2.h
+@@ -1,7 +1,8 @@
+-extern void layer2_connect(void);
+-extern void layer2_connect2(const char *, const int);
+-extern int layer2_getc(void);
+-extern void layer2_ungetc(void);
+-extern void layer2_write(const unsigned char *s, unsigned int len);
+-extern int layer2_write_readbuffer(uint8_t c);
+-extern int layer2_eof();
++void layer2_connect(void);
++void connect_to_service(void);
++void layer2_connect2(const char *, const int);
++int layer2_getc(void);
++void layer2_ungetc(void);
++void layer2_write(const unsigned char *s, unsigned int len);
++int layer2_write_readbuffer(uint8_t c);
++int layer2_eof();
+diff --git a/sdl/btx_sdl.c b/sdl/btx_sdl.c
+index de1ffd3..3ba752c 100644
+--- a/sdl/btx_sdl.c
++++ b/sdl/btx_sdl.c
+@@ -83,7 +83,7 @@ void write_image(const uint32_t pixels[], const int w, const int h)
+ }
+ 
+ 
+-void decoder_thread(void *x_void_ptr)
++void* decoder_thread(void *x_void_ptr)
+ {
+ 	char conn[256];
+ 	memset(conn, 0, sizeof(conn));
+@@ -103,6 +103,7 @@ void decoder_thread(void *x_void_ptr)
+ 	while (quit) {
+ 		process_BTX_data();
+ 	}
++	return NULL;
+ }
+ 
+ //Translation table for special characters

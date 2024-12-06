@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %}New Printer{% endblock %}
+
+{% block content %}
+    <style>
+        input[type=checkbox]:checked + label .border {
+            border-color: var(--bs-green) !important;
+        }
+    </style>
+
+    <h1>Rent your personal printer</h1>
+
+    <form method="post" action="{{ url_for('web.printer_add') }}">
+
+        <fieldset class="mb-5 mt-5">
+            <legend>1. Choose a name</legend>
+            <div>
+                <label class="visually-hidden" for="specificSizeInputGroupUsername">Printer Name</label>
+                <div class="input-group">
+                    <div class="input-group-text">{{ user.name }}-</div>
+                    <input type="text" name="name" class="form-control" id="specificSizeInputGroupUsername"
+                           placeholder="Name">
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="mb-5">
+            <legend>2. Select your templates</legend>
+            <div class="row g-1">
+                {% for tmpl in templates %}
+                    <div class="col-lg-4 col-md-6 form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="template-{{ tmpl.key }}"
+                               id="template-{{ tmpl.key }}">
+                        <label class="form-check-label" for="template-{{ tmpl.key }}">
+                            {{ tmpl.name }}<br/>
+                            <img src="{{ tmpl.preview_url }}"
+                                 class="border rounded" alt="{{ tmpl.name }}">
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </fieldset>
+
+        <fieldset class="mb-5">
+            <legend>3. Select upgrades</legend>
+            <div>
+                <select class="form-select" aria-label="Upgrades" name="upgrades" multiple>
+                    <option value="" selected>- none -</option>
+                    <option value="digitalize">+ digitalize (+11.99$/month)</option>
+                    <option value="tls">+ encrypted communication (+7.99$/month)</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <fieldset class="mb-5">
+            <legend>4. Rent your personal printer</legend>
+            <div class="mt-2">
+                <button type="submit" class="btn btn-primary btn-lg">Setup Printer</button>
+            </div>
+        </fieldset>
+
+    </form>
+{% endblock %}

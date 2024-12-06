@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+    <h1>Sign up</h1>
+    <p class="lead mb-5">Create an account to rent printers and start your free trial!</p>
+
+    <form method="POST" action="/signup" class="mb-5">
+        <div class="row g-3">
+            <div class="col">
+                <label for="inputName" class="form-label">Username</label>
+                <input name="name" id="inputName" type="text" class="form-control" aria-label="Username" pattern="^[A-Za-z0-9]{3,32}$">
+                <div class="form-text">3-48 alphanumeric characters</div>
+            </div>
+            <div class="col">
+                <label for="inputPassword" class="form-label">Password</label>
+                <input name="password" id="inputPassword" type="password" class="form-control" aria-label="Password">
+                <div class="form-text">at least 8 characters</div>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+        </div>
+    </form>
+
+    <a href="{{ url_for('auth.login') }}">Already have an account? Login here...</a>
+
+{% endblock %}

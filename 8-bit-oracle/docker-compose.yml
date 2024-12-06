@@ -1,0 +1,10 @@
+---
+
+services:
+  service:
+    image: "saarsec/8-bit-oracle"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "17280:17280"
